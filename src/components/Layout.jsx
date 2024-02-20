@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
