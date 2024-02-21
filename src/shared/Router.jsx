@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export default function Router() {
-  const isLogin = false;
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   return (
     <BrowserRouter>
       <Routes>
-        {isLogin ? (
+        {isLogin && isLogin ? (
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

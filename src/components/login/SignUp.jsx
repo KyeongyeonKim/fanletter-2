@@ -1,13 +1,38 @@
+import { authApi } from "axios/api";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { setProfile } from "redux/modules/authSlice";
 import styled from "styled-components";
 
 function SignUp({ onLogInClick }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await authApi.post("/register", {
+        id: userId,
+        password: password,
+        nickname: nickname,
+      });
+      if (!userId || !password || !nickname) {
+        return alert("아이디, 비밀번호, 닉네임은 필수값입니다.");
+      }
+      dispatch(setProfile({ avatar: "", nickname: nickname }));
+      navigate("/");
+    } catch (error) {
+      alert("오류!");
+    }
+  };
+
   return (
-    <StDiv>
+    <StDiv onSubmit={handleSubmit}>
       <form>
         <StH1>회원가입</StH1>
         <StInput

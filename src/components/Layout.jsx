@@ -1,15 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
+import { logout } from "redux/modules/authSlice";
 import styled from "styled-components";
 
 function Layout() {
+  const dispatch = useDispatch();
   return (
     <>
       <StNav>
         <Link to="/">HOME</Link>
         <div>
           <Link to="/profile">내 프로필</Link>
-          <Link to="/">로그아웃</Link>
+          <Link onClick={() => dispatch(logout())}>로그아웃</Link>
         </div>
       </StNav>
       <Outlet />

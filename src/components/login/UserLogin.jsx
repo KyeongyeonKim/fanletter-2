@@ -1,13 +1,34 @@
+import { authApi } from "axios/api";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "redux/modules/authSlice";
 import styled from "styled-components";
 
 function UserLogin({ onSignUpClick }) {
+  const dispatch = useDispatch();
+
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await authApi.post("/login", {
+        id: userId,
+        password: password,
+      });
+      if (!userId || !password) {
+        return alert("아이디와 비밀번호를 입력해주세요.");
+      }
+      dispatch(login({ userId, password }));
+    } catch (error) {
+      alert("오류!");
+    }
+  };
+
   return (
     <StDiv>
-      <form>
+      <form onSubmit={handleSubmit}>
         <StH1>로그인</StH1>
         <StInput
           type="text"
