@@ -14,17 +14,17 @@ const authSlice = createSlice({
     login: (state, action) => {
       const { accessToken, userId, avatar, nickname } = action.payload;
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userId", userId);
-      localStorage.setItem("avatar", avatar);
-      localStorage.setItem("nickname", nickname);
-      state.avatar = avatar;
-      state.userId = userId;
+      // localStorage.setItem("userId", userId);
+      // localStorage.setItem("avatar", avatar);
+      // localStorage.setItem("nickname", nickname);
+      // state.avatar = avatar;
+      // state.userId = userId;
       state.isLogin = true;
-      state.nickname = nickname;
+      // state.nickname = nickname;
     },
     logout: (state) => {
-      localStorage.clear();
       state.isLogin = false;
+      localStorage.clear();
     },
     setProfile: (state, action) => {
       const { avatar, nickname } = action.payload;

@@ -8,13 +8,13 @@ function Layout() {
   const dispatch = useDispatch();
   return (
     <>
-      <StNav>
+      <Header>
         <Link to="/">HOME</Link>
         <div>
           <Link to="/profile">내 프로필</Link>
           <Link onClick={() => dispatch(logout())}>로그아웃</Link>
         </div>
-      </StNav>
+      </Header>
       <Outlet />
     </>
   );
@@ -22,9 +22,22 @@ function Layout() {
 
 export default Layout;
 
-const StNav = styled.nav`
-  padding: 20px;
+const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  background-color: #b5c0d0;
+  align-items: center;
+  padding: 6px 30px;
+  height: 30px;
+  background-color: gray;
+  user-select: none;
+  & a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      color: white;
+    }
+  }
+  & div a:nth-child(2) {
+    margin-left: 30px;
+  }
 `;

@@ -12,7 +12,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        {isLogin && isLogin ? (
+        {isLogin ? (
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
@@ -21,13 +21,8 @@ export default function Router() {
           </Route>
         ) : (
           <>
-            <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route
-              path="/detail/:id"
-              element={<Navigate replace to="/login" />}
-            />
-            <Route path="/profile" element={<Navigate replace to="/login" />} />
             <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Navigate replace to="/login" />} />
           </>
         )}
       </Routes>
